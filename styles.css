@@ -1,0 +1,461 @@
+:root {
+    --primary-color: #00a0b0;
+    --primary-dark: #008a99;
+    --accent-color: #e8b84d;
+    --text-dark: #333333;
+    --text-light: #666666;
+    --border-color: #e1e1e1;
+    --white: #ffffff;
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Playfair Display', 'Times New Roman', serif;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: var(--text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+    font-size: 17px;
+}
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 36px 24px;
+}
+
+/* Header et Logo */
+header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.logo-container {
+    margin-bottom: 0.25rem;
+}
+
+.prefix {
+    display: block;
+    font-size: 24px;
+    color: var(--accent-color);
+    margin-bottom: 0.1rem;
+}
+
+.logo {
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin: 0;
+    line-height: 0.9;
+}
+
+.subtitle {
+    color: var(--white);
+    opacity: 0.9;
+    font-size: 15px;
+    margin-top: 0.25rem;
+}
+
+.phone-number {
+    color: var(--accent-color);
+    font-size: 16px;
+    margin-top: 0.25rem;
+    font-weight: 500;
+}
+
+/* Sections principales */
+.rating-section, .reviews-section {
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+}
+
+/* Barre de progression */
+.progress-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+}
+
+.progress-step {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--border-color);
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+    transition: var(--transition);
+}
+
+.progress-step.active {
+    background-color: var(--primary-color);
+    color: var(--white);
+    transform: scale(1.1);
+}
+
+.progress-step.completed {
+    background-color: var(--accent-color);
+    color: var(--white);
+}
+
+.progress-line {
+    flex: 1;
+    height: 8px;
+    background-color: var(--border-color);
+    margin: 0 10px;
+    transition: var(--transition);
+}
+
+.progress-line.active {
+    background-color: var(--primary-color);
+}
+
+/* Étapes de notation */
+.step-container {
+    position: relative;
+    min-height: 300px;
+}
+
+.rating-step {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: var(--transition);
+}
+
+.rating-step.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.step-title {
+    color: var(--primary-color);
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    letter-spacing: 0.2px;
+}
+
+.step-description {
+    color: var(--text-light);
+    font-size: 17px;
+    margin-bottom: 2rem;
+}
+
+/* Étoiles de notation */
+.rating-stars {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.star {
+    font-size: 56px;
+    color: var(--border-color);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.star:hover,
+.star.active {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+/* Zone de texte */
+.input-text {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    min-height: 120px;
+    margin-bottom: 2rem;
+    transition: var(--transition);
+    resize: vertical;
+}
+
+.input-text:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Boutons de navigation */
+.nav-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.prev-btn,
+.next-btn,
+.submit-btn,
+.modal-close-btn {
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    font-family: Arial, sans-serif;
+}
+
+.prev-btn {
+    background-color: var(--border-color);
+    color: var(--text-dark);
+}
+
+.next-btn,
+.modal-close-btn {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.submit-btn {
+    background-color: var(--accent-color);
+    color: var(--text-dark);
+}
+
+.prev-btn:hover,
+.next-btn:hover,
+.submit-btn:hover,
+.modal-close-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+/* Section des avis */
+.reviews-section h2 {
+    font-size: 24px;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.review-card {
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.5rem 0;
+}
+
+.review-card:last-child {
+    border-bottom: none;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.review-date {
+    color: var(--text-light);
+    font-size: 15px;
+    font-style: italic;
+}
+
+.review-average {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.review-criteria {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 16px;
+}
+
+.review-criteria-label {
+    color: var(--text-light);
+}
+
+.review-rating {
+    color: var(--accent-color);
+}
+
+.review-comment {
+    color: var(--text-light);
+    font-size: 15px;
+    font-style: italic;
+    background-color: rgba(0, 160, 176, 0.05);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+/* Modal */
+.thank-you-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.thank-you-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    padding: 32px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 90%;
+    width: 400px;
+    transform: translateY(20px);
+    transition: var(--transition);
+}
+
+.thank-you-modal.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-icon {
+    font-size: 56px;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    animation: starPulse 2s infinite;
+}
+
+@keyframes starPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.modal-content h2 {
+    color: var(--primary-color);
+    font-size: 24px;
+    margin-bottom: 1rem;
+}
+
+.modal-content p {
+    margin-bottom: 0.8rem;
+    color: var(--text-light);
+    font-size: 17px;
+}
+
+.modal-phone {
+    font-size: 24px;
+    color: var(--accent-color);
+    font-weight: 600;
+    margin: 1.5rem 0;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem;
+    color: var(--white);
+    opacity: 0.8;
+    font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    .logo {
+        font-size: 56px;
+    }
+
+    .prefix {
+        font-size: 24px;
+    }
+
+    .rating-section,
+    .reviews-section {
+        padding: 24px;
+    }
+
+    .star {
+        font-size: 48px;
+    }
+
+    .progress-step {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .step-title {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 16px;
+    }
+
+    .rating-section,
+    .reviews-section {
+        padding: 16px;
+    }
+
+    .star {
+        font-size: 40px;
+    }
+
+    .nav-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .prev-btn,
+    .next-btn,
+    .submit-btn {
+        width: 100%;
+    }
+
+    .progress-step {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+} 
