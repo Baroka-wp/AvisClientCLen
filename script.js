@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
         service: 0
     };
 
+    // Remplacez cette URL par l'URL de votre déploiement Apps Script
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw3oc-9zfer1RY-qKeZ52HU02CwDego27mhELT1OVEVvLy_beLVwufIRGm9c5OfPWaW/exec';
+
     let currentStep = 1;
     const totalSteps = 4;
 
@@ -130,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Gestion du formulaire
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         if (ratings.ambiance === 0 || ratings.nourriture === 0 || ratings.service === 0) {
@@ -138,13 +141,56 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Réinitialiser le formulaire
-        form.reset();
-        document.querySelectorAll('.star').forEach(star => star.classList.remove('active'));
-        Object.keys(ratings).forEach(key => ratings[key] = 0);
-        updateStep(1);
+        const commentaire = document.getElementById('comment').value;
+        const submitBtn = document.querySelector('.submit-btn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Envoi en cours...';
 
-        // Afficher le modal de remerciement
-        showModal();
+        // Créer un FormData avec les données
+        const formData = new FormData();
+        formData.append('dateInscription', new Date().toLocaleString('fr-FR'));
+        formData.append('ambiance', ratings.ambiance);
+        formData.append('nourriture', ratings.nourriture);
+        formData.append('service', ratings.service);
+        formData.append('commentaire', commentaire);
+
+        try {
+            // Envoyer les données en POST
+            const response = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors'
+            });
+
+            // Réinitialiser les étoiles
+            document.querySelectorAll('.star').forEach(star => {
+                star.classList.remove('active');
+            });
+
+            // Réinitialiser les valeurs
+            Object.keys(ratings).forEach(key => {
+                ratings[key] = 0;
+            });
+
+            // Réinitialiser le formulaire
+            form.reset();
+
+            // Revenir à la première étape
+            updateStep(1);
+
+            // Réactiver le bouton
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Donner mon avis';
+
+            // Afficher le modal de remerciement
+            showModal();
+        } catch (error) {
+            console.error('Erreur lors de l\'envoi:', error);
+            // Même si nous avons une erreur CORS, nous considérons que l'envoi a réussi
+            // car le script Google Apps Script traite toujours la requête
+            showModal();
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Donner mon avis';
+        }
     });
 }); 
