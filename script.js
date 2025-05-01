@@ -116,6 +116,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function hideModal() {
         modal.classList.remove('active');
         document.body.style.overflow = '';
+        // Fermer la fenêtre après un court délai
+        setTimeout(() => {
+            window.close();
+            // Si window.close() ne fonctionne pas (navigateurs modernes peuvent le bloquer),
+            // rediriger vers about:blank
+            window.location.href = 'about:blank';
+        }, 300);
     }
 
     closeModalBtn.addEventListener('click', hideModal);

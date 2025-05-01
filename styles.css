@@ -137,7 +137,7 @@ header {
 /* Étapes de notation */
 .step-container {
     position: relative;
-    min-height: 300px;
+    min-height: 360px;
 }
 
 .rating-step {
@@ -195,15 +195,15 @@ header {
 /* Zone de texte */
 .input-text {
     width: 100%;
-    padding: 16px;
+    padding: 12px;
     border: 2px solid var(--border-color);
     border-radius: 8px;
     font-size: 16px;
     font-family: Arial, sans-serif;
-    min-height: 120px;
-    margin-bottom: 2rem;
+    min-height: 100px;
+    margin-bottom: 1rem;
     transition: var(--transition);
-    resize: vertical;
+    resize: none;
 }
 
 .input-text:focus {
@@ -211,18 +211,24 @@ header {
     border-color: var(--primary-color);
 }
 
+/* Ajustement pour l'étape finale */
+.rating-step[data-step="4"] .step-description {
+    margin-bottom: 1rem;
+}
+
 /* Boutons de navigation */
 .nav-buttons {
     display: flex;
-    gap: 1rem;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
 }
 
 .prev-btn,
 .next-btn,
 .submit-btn,
 .modal-close-btn {
-    padding: 12px 32px;
+    padding: 12px 24px;
     border-radius: 8px;
     font-size: 17px;
     font-weight: 500;
@@ -230,22 +236,27 @@ header {
     transition: var(--transition);
     border: none;
     font-family: Arial, sans-serif;
+    width: 100%;
+    text-align: center;
 }
 
 .prev-btn {
     background-color: var(--border-color);
     color: var(--text-dark);
+    order: 2;
 }
 
 .next-btn,
 .modal-close-btn {
     background-color: var(--primary-color);
     color: var(--white);
+    order: 1;
 }
 
 .submit-btn {
     background-color: var(--accent-color);
     color: var(--text-dark);
+    order: 1;
 }
 
 .prev-btn:hover,
@@ -433,9 +444,8 @@ footer {
         padding: 16px;
     }
 
-    .rating-section,
-    .reviews-section {
-        padding: 16px;
+    .rating-section {
+        padding: 20px;
     }
 
     .star {
@@ -443,14 +453,14 @@ footer {
     }
 
     .nav-buttons {
-        flex-direction: column;
         gap: 0.5rem;
+        margin-top: 1rem;
     }
 
     .prev-btn,
     .next-btn,
     .submit-btn {
-        width: 100%;
+        padding: 14px;
     }
 
     .progress-step {
